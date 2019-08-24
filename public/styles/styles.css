@@ -1,0 +1,32 @@
+.navList {
+    list-style-type: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: aquamarine;
+}
+
+.navItemLeft {
+    float: left;
+}
+
+.navItemRight {
+    float: right;
+}
+
+.navItemLeft .navLink {
+    text-decoration: none;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+.navItemRight .navLink {
+    text-decoration: none;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+
+}
