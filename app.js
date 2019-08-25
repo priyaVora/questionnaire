@@ -8,8 +8,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 
 // Connection URL
-const url = '<connection_url>';
-const dbName = '<database_name>';
+const url = 'mongodb+srv://dbUser:dbUserPassword@cluster0-t2kyl.gcp.mongodb.net/test?retryWrites=true&w=majority';
+const dbName = 'questionnaire_db';
 
 var mongoOptions = {
     useNewUrlParser: true,
@@ -23,6 +23,28 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', function (req, res) {
     res.render("index");
+});
+
+app.get('/viewusers', function (req, res) {
+    (async function mongo() {
+        try {
+            var client = await MongoClient.connect(url, mongoOptions);
+            var db = client.db(dbName);
+            db.collection('Users')
+                .find()
+                .toArray().then(users => {
+                    var model = {
+                        title: "Users!",
+                        rawr: users
+                    };
+                    res.render("viewusers", model);
+                })
+        } catch (err) {
+            console.log(err);
+        } finally {
+            client.close();
+        }
+    }());
 });
 
 app.get('/login', function (req, res) {
@@ -65,6 +87,7 @@ app.post('/register', function (req, res) {
                 user_level: 'user',
                 email: req.body.email,
                 age: req.body.age,
+                status: 'active',
                 answer1: req.body.answer1,
                 answer2: req.body.answer2,
                 answer3: req.body.answer3

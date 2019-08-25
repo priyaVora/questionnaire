@@ -1,0 +1,46 @@
+extends layout.pug
+
+block content
+    div()
+        h1()="All Accounts"
+        each user in rawr
+            div()
+                div()
+                    #table-wrapper
+                        table#desc
+                            tr
+                            th User
+                            tr
+                            td= "Username: " + user.username
+                            tr
+                            tr
+                            td= "User Level: " + user.user_level
+                            tr
+                            tr
+                            td= "Email: " + user.email
+                            tr
+                            tr
+                            td= "Age: " + user.age
+                            tr
+                            tr
+                            td= "Answer 1: " + user.answer1
+                            tr
+                            tr
+                            td= "Answer 1: " + user.answer1
+                            tr
+                            tr
+                            td= "Answer 1: " + user.answer1
+                            tr    
+                            td(height='25px')
+                        table
+                            tr
+                            th Current Status
+                            tr
+                            td= user.status
+                            tr
+                        table()
+                            tr
+                            a(href="http://localhost:3000/user/"+user.username+"/activate" id="activate")="Activate"    
+                            tr
+                            a(href="http://localhost:3000/user/"+user.username+"/suspend" id="suspend")="Suspend"
+                            tr

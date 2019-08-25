@@ -30,3 +30,56 @@
     padding: 14px 16px;
 
 }
+
+@use postcss-nested;
+@use postcss-cssnext;
+
+#table-wrapper {
+  display: flex;
+  
+}
+#desc {
+  width: 15em;
+  border-collapse: collapse;
+  
+  & th {
+    background-color: whitesmoke;
+    padding: 1em;
+    text-align: left;
+    border: 1px solid black;
+    padding: 1em;
+  }
+  
+  & td {
+    border: 1px solid black;
+    padding: 1em;
+  } 
+}
+
+#activate {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width:10%;
+    height: 25px;
+    justify-content: center;
+    text-align: center;
+    font-size: 15px;
+}
+
+#suspend {
+    background-color: red;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width:10%;
+    height: 25px;
+    justify-content: center;
+    text-align: center;
+    font-size: 15px;
+}
