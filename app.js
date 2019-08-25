@@ -5,10 +5,11 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 const assert = require('assert');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt-nodejs');
 
 // Connection URL
 const url = '<connection_url>';
-const dbName = 'questionnaire_db';
+const dbName = '<database_name>';
 
 var mongoOptions = {
     useNewUrlParser: true,
@@ -16,7 +17,9 @@ var mongoOptions = {
 };
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 
 app.get('/', function (req, res) {
     res.render("index");
@@ -27,7 +30,25 @@ app.get('/login', function (req, res) {
 });
 
 app.post('/login', function (req, res) {
-    res.send("User has login!");
+    let pw = req.body.password;
+    (async function mongo() {
+        try {
+            var client = await MongoClient.connect(url, mongoOptions);
+            var db = client.db(dbName);
+            return db.collection('Users')
+                .findOne({
+                    "username":req.body.username
+                });
+        } catch (err) {
+            console.log(err);
+        } finally {
+            client.close();
+        }
+    }()).then(user => {
+        if(bcrypt.compareSync(pw, user.hash)) { 
+            res.redirect('http://localhost:3000/');
+        }
+    })
 });
 
 app.get('/register', function (req, res) {
@@ -35,7 +56,32 @@ app.get('/register', function (req, res) {
 });
 
 app.post('/register', function (req, res) {
-    res.redirect('http://localhost:3000/login');
+    (async function mongo() {
+        try {
+            const hash = bcrypt.hashSync(req.body.password);
+            let obj = {
+                username: req.body.username,
+                hash: hash,
+                user_level: 'user',
+                email: req.body.email,
+                age: req.body.age,
+                answer1: req.body.answer1,
+                answer2: req.body.answer2,
+                answer3: req.body.answer3
+            };
+            var client = await MongoClient.connect(url, mongoOptions);
+            var db = client.db(dbName);
+            db.collection("Users").insertOne(obj, function (err, res) {
+                if (err) throw err;
+                console.log("1 document inserted");
+            });
+            res.redirect('http://localhost:3000/login');
+        } catch (err) {
+            console.log(err);
+        } finally {
+            client.close();
+        }
+    }());
 });
 
 app.listen(port, function () {
