@@ -1,1 +1,15 @@
 extends layout.pug
+block content
+    h1="Login"
+        form(method='POST' action='/login')
+                div.form-group
+                    label(for='username') Username:  
+                    input(type='text', placeholder='Username' name="username")
+                div.form-group
+                    label(for='password') Password: 
+                    input(type='Password', placeholder='Password' name='password')
+                
+                div.form-group
+                button.btn.btn-primary(type='submit') Login
+    
+    
