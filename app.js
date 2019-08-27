@@ -112,8 +112,12 @@ app.post('/login', function (req, res) {
             client.close();
         }
     }()).then(user => {
-        if(bcrypt.compareSync(pw, user.hash)) { 
-            res.redirect('http://localhost:3000/');
+        if(user.status === "active") { 
+            if(bcrypt.compareSync(pw, user.hash)) { 
+                res.redirect('http://localhost:3000/');
+            }
+        } else { 
+            res.render("suspended");
         }
     })
 });
