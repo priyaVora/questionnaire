@@ -141,9 +141,9 @@ app.post('/register', function (req, res) {
                 email: req.body.email,
                 age: req.body.age,
                 status: 'active',
-                answer1: answer1,
-                answer2: answer2,
-                answer3: answer3
+                answer1: req.body.flavor,
+                answer2: req.body.message,
+                answer3: req.body.season
             };
             
             var client = await MongoClient.connect(url, mongoOptions);
