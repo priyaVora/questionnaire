@@ -129,7 +129,11 @@ app.get('/register', function (req, res) {
 app.post('/register', function (req, res) {
     (async function mongo() {
         try {
-            const hash = bcrypt.hashSync(req.body.password);
+            const hash = bcrypt.hashSync(req.body.password)
+            const answer1 = req.body.flavor === "on" ? "Chocolate": "Vanilla";
+            const answer2 = req.body.message === "on" ? "Text": "Call";
+            const answer3 = req.body.phonetype === "on" ? "iOS": "Android";
+
             let obj = {
                 username: req.body.username,
                 hash: hash,
@@ -137,10 +141,11 @@ app.post('/register', function (req, res) {
                 email: req.body.email,
                 age: req.body.age,
                 status: 'active',
-                answer1: req.body.answer1,
-                answer2: req.body.answer2,
-                answer3: req.body.answer3
+                answer1: answer1,
+                answer2: answer2,
+                answer3: answer3
             };
+            
             var client = await MongoClient.connect(url, mongoOptions);
             var db = client.db(dbName);
             db.collection("Users").insertOne(obj, function (err, res) {

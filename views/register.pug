@@ -1,6 +1,6 @@
 extends layout.pug
 block content
-    h1="Register"
+    div="Register"
         form(method='POST' action='/register')
                 div.form-group
                     label(for='username') Username:  
@@ -15,15 +15,23 @@ block content
                     label(for='age') Age:  
                     input(type='text', placeholder='Age' name='age')
                 div.form-group
-                    label(for='question1') Question 1:
-                    input(type='text', placeholder='Answer 1' name='answer1')
+                    label() Vanilla
+                    label(class="switch")
+                        input(type="checkbox" name="flavor")
+                        span(class="slider round")
+                    label() Chocolate
                 div.form-group
-                    label(for='question2') Question 2: 
-                    input(type='text', placeholder='Answe2' name='answer2')
+                    label() Call
+                    label(class="switch")
+                        input(type="checkbox" name="message")
+                        span(class="slider round")
+                    label() Text
                 div.form-group
-                    label(for='question3') Question 3: 
-                    input(type='text', placeholder='Answer 3' name='answer3')
-                
+                    label() Android
+                    label(class="switch")
+                        input(type="checkbox" name="phonetype")
+                        span(class="slider round")
+                    label() iOS
                 div.form-group
                 button.btn.btn-primary(type='submit') Register
 
