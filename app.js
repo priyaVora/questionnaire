@@ -47,6 +47,51 @@ app.get('/viewusers', function (req, res) {
     }());
 });
 
+app.get('/user/:username/activate', function (req, res) {
+    const {username} = req.params;
+    (async function mongo() {
+        try {
+            var client = await MongoClient.connect(url, mongoOptions);
+            var db = client.db(dbName);
+            var myquery = { username: username };
+            var newvalues = {$set:{ status: "active"}};
+            
+            db.collection("Users").updateOne(myquery, newvalues, function(err, res) {
+                if (err) throw err;
+                console.log("1 document updated");
+              });
+              res.redirect('http://localhost:3000/viewusers');
+        } catch (err) {
+            console.log(err);
+        } finally {
+            client.close();
+        }
+    }());
+});
+
+app.get('/user/:username/suspend', function (req, res) {
+    const {username} = req.params;
+    (async function mongo() {
+        try {
+            var client = await MongoClient.connect(url, mongoOptions);
+            var db = client.db(dbName);
+            
+            var myquery = { username: username };
+            var newvalues = {$set:{ status: "suspended"}};
+            
+            db.collection("Users").updateOne(myquery, newvalues, function(err, res) {
+                if (err) throw err;
+                console.log("1 document updated");
+              });
+              res.redirect('http://localhost:3000/viewusers');
+        } catch (err) {
+            console.log(err);
+        } finally {
+            client.close();
+        }
+    }());
+});
+
 app.get('/login', function (req, res) {
     res.render("login");
 });
@@ -67,8 +112,12 @@ app.post('/login', function (req, res) {
             client.close();
         }
     }()).then(user => {
-        if(bcrypt.compareSync(pw, user.hash)) { 
-            res.redirect('http://localhost:3000/');
+        if(user.status === "active") { 
+            if(bcrypt.compareSync(pw, user.hash)) { 
+                res.redirect('http://localhost:3000/');
+            }
+        } else { 
+            res.render("suspended");
         }
     })
 });
