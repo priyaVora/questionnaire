@@ -17,12 +17,28 @@ var mongoOptions = {
     useUnifiedTopology: true
 };
 
-
 var router = express.Router();
 
 router.route("/").get(
     function (req, res) {
-        res.render("index");
+        console.log("Session: ", req.session);
+        if(req.session.state === 'Logged-in') { 
+            console.log("State of User: "  +req.session.userId +  " "+ req.session.state);
+        }
+        var model = {
+            loggedin: (req.session.state === 'Logged-in') ? true : false,
+            isAdmin: (req.session.user_level) === 'admin' ? true : false
+        };
+        console.log("Allow: ", model.loggedin);
+        res.render("index", model);
+    }
+);
+
+router.route("/logout").get(
+    function (req, res) {
+        res.render("index"); 
+        req.session.state = "Logged-Out";
+        console.log(req.session);
     }
 );
 router.route('/login').get(
@@ -55,6 +71,10 @@ router.route('/login').post(
         }()).then(user => {
             if (user.status === "active") {
                 if (bcrypt.compareSync(pw, user.hash)) {
+                    req.session.userId = user._id;
+                    req.session.state = "Logged-in";
+                    req.session.user_level = user.user_level;
+                    console.log(req.session);
                     res.redirect('http://localhost:3000/');
                 }
             } else {
