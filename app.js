@@ -129,11 +129,11 @@ app.get('/register', function (req, res) {
 app.post('/register', function (req, res) {
     (async function mongo() {
         try {
-            const hash = bcrypt.hashSync(req.body.password)
+            const hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync())
             const answer1 = req.body.flavor === "on" ? "Chocolate": "Vanilla";
             const answer2 = req.body.message === "on" ? "Text": "Call";
             const answer3 = req.body.phonetype === "on" ? "iOS": "Android";
-
+            
             let obj = {
                 username: req.body.username,
                 hash: hash,
