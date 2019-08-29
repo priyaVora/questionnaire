@@ -86,14 +86,14 @@
 
 .barGraphsContainer {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto;
 }
 
 .barGraphDiv {
   background-color: #FFFFFF;
   border: 10px solid #311D00;
-  width: 100px;
-  height: 100px;
+  width: 450px;
+  height: 300px;
 }
 
 /* The switch - the box around the slider */
@@ -158,3 +158,5 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+
