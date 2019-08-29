@@ -133,6 +133,8 @@ body  {
 }
 
 .barGraphsContainer {
+  margin-top:10%;
+  justify-content: center;
   display: grid;
   grid-template-columns: auto auto auto;
 }
