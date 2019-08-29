@@ -1,9 +1,58 @@
+body  {
+  background-image: url("../images/background1.jpg");
+  background-size: 100%;
+}
+
 .navList {
     list-style-type: none;
     overflow: hidden;
     margin: 0;
     padding: 0;
-    background-color: aquamarine;
+    background-color: white;
+}
+
+.viewprofileboard { 
+  background-color: rgba(223, 240,226, 0.5);
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+  margin-top:5%;
+}
+
+.card { 
+    background-color: rgba(223, 240,226, 0.5);
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px;
+    height: auto;
+    margin: auto;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    width: 50%;
+    border: 3px solid green;
+    padding: 1%;
+
+}
+
+.button{
+  background-color: #e7e7e7; color: black;
+  border-radius: 25px;
+  padding: 10px;
+  margin: 3%;
+}
+
+.viewprofileboard2 {
+  margin-top: 5%; 
+  background-color: rgba(0, 100,0, 0.5);
+  border-radius: 25px;
+  border: 2px solid #fff;
+  padding: 4%;
+  width: auto;
+  height: 150px;
+  color: white;
+  font-size: large;
 }
 
 .navItemLeft {
@@ -36,6 +85,7 @@
 
 #table-wrapper {
   display: flex;
+  width:auto;
   
 }
 #desc {
@@ -63,11 +113,10 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    width:10%;
+    width:auto;
     height: 25px;
     justify-content: center;
-    text-align: center;
-    font-size: 15px;
+    
 }
 
 #suspend {
@@ -77,11 +126,10 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    width:10%;
+    width:auto;
     height: 25px;
     justify-content: center;
-    text-align: center;
-    font-size: 15px;
+
 }
 
 /* The switch - the box around the slider */
