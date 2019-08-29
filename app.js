@@ -6,6 +6,8 @@ const ObjectId = require('mongodb').ObjectID;
 const assert = require('assert');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
+const session = require('express-session');
+
 
 // Connection URL
 const url = 'mongodb+srv://dbUser:dbUserPassword@cluster0-t2kyl.gcp.mongodb.net/test?retryWrites=true&w=majority';
@@ -20,6 +22,12 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({
     extended: false
 }))
+
+// Session Package setup
+app.use(session({
+    secret: 'rawr',
+    cookie: { }
+}));
 
 var adminRoutes = require('./routes/adminRoutes');
 app.use("/admin/", adminRoutes);

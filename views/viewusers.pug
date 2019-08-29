@@ -2,10 +2,9 @@ extends layout.pug
 
 block content
     div()
-        h1()="All Accounts"
         each user in rawr
             div()
-                div()
+                div(class='card')
                     #table-wrapper
                         table#desc
                             tr
@@ -23,13 +22,13 @@ block content
                             td= "Age: " + user.age
                             tr
                             tr
-                            td= "Answer 1: " + user.answer1
+                            td= "Flavor: " + user.answer1
                             tr
                             tr
-                            td= "Answer 1: " + user.answer1
+                            td= "Message Preference: " + user.answer2
                             tr
                             tr
-                            td= "Answer 1: " + user.answer1
+                            td= "Season: " + user.answer3
                             tr    
                             td(height='25px')
                         table
@@ -38,7 +37,8 @@ block content
                             tr
                             td= user.status
                             tr
-                        table()
+                            tr
+                        table(class="links")
                             tr
                             a(href="http://localhost:3000/admin/user/"+user.username+"/activate" id="activate")="Activate"    
                             tr

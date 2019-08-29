@@ -8,10 +8,17 @@ html
             ul(class="navList")
                 li(class="navItemLeft")
                     a(href="/", class="navLink")="Home"
-                li(class="navItemLeft")
-                    a(href="/admin/viewusers", class="navLink")="View Users"
-                li(class="navItemRight")
-                    a(href="/register", class="navLink")="Register"                    
-                li(class="navItemRight")
-                    a(href="/login", class="navLink")="Login"                          
+                if isAdmin
+                    li(class="navItemLeft")
+                        a(href="/admin/viewusers", class="navLink")="View Users"
+                if loggedin
+                    li(class="navItemRight")
+                        a(href="/viewProfile", class="navLink")="View Profile"
+                    li(class="navItemRight")
+                        a(href="/logout", class="navLink")="Log Out"
+                else           
+                    li(class="navItemRight")
+                        a(href="/register", class="navLink")="Register"                    
+                    li(class="navItemRight")
+                        a(href="/login", class="navLink")="Login"                         
     block content

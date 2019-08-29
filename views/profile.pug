@@ -1,7 +1,6 @@
 extends layout.pug
 block content
-
-        form(method='POST' action='/register')
+      form(method='POST' action='/updateuser')
                 div(class='viewprofileboard')
                     div
                         label(for='username') Username:  
@@ -59,7 +58,6 @@ block content
                         label() Fall
 
                 div
-                button(class='button').btn.btn-primary(type='submit') Register
-
-
-
+                button(class="button").btn.btn-primary(type='submit') Update
+    
+    

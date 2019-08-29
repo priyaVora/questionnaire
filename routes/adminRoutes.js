@@ -26,6 +26,8 @@ router.route("/viewusers").get(
                     .toArray().then(users => {
                         var model = {
                             title: "Users!",
+                            loggedin: (req.session.state === 'Logged-in') ? true : false,
+                            isAdmin: (req.session.user_level) === 'admin' ? true : false,
                             rawr: users
                         };
                         res.render("viewusers", model);
