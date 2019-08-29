@@ -21,6 +21,30 @@ var router = express.Router();
 
 router.route("/").get(
     function (req, res) {
+        try {
+            MongoClient.connect(url, mongoOptions, function (err, client) {
+                const db = client.db(dbName);
+                db.collection('Users')
+                    .countDocuments({ answer1: "Vanilla" }).then(count => {
+                        console.log("Vanilla " + count);
+                    });
+                db.collection('Users')
+                    .countDocuments({ answer1: "Chocolate" }).then(count => {
+                        console.log("Chocolate " + count);
+                    });
+                db.collection('Users')
+                    .countDocuments({ answer1: "Strawberry" }).then(count => {
+                        console.log("Strawberry " + count);
+                    });
+                db.collection('Users')
+                    .countDocuments({ answer1: "Mint Chocoloate Chip" }).then(count => {
+                        console.log("Mint Chocolate Chip " + count);
+                    });
+            });
+        } catch (e) {
+            console.log(e);
+        }
+
         console.log("Session: ", req.session);
         if (req.session.state === 'Logged-in') {
             console.log("State of User: " + req.session.userId + " " + req.session.state);
@@ -36,6 +60,7 @@ router.route("/").get(
 
 router.route("/logout").get(
     function (req, res) {
+
         res.render("index");
         req.session.state = "Logged-Out";
         console.log(req.session);

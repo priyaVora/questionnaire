@@ -132,6 +132,18 @@ body  {
 
 }
 
+.barGraphsContainer {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.barGraphDiv {
+  background-color: #FFFFFF;
+  border: 10px solid #311D00;
+  width: 450px;
+  height: 300px;
+}
+
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -194,3 +206,5 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+

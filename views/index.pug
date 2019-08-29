@@ -1,1 +1,16 @@
 extends layout.pug
+
+block scripts
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js")
+
+block content
+    div(class="barGraphsContainer")
+        div(class="barGraphDiv")
+            canvas(id="Q1", class="barGraphCanvas")
+        div(class="barGraphDiv")
+            canvas(id="Q2", class="barGraphCanvas")
+        div(class="barGraphDiv")
+            canvas(id="Q3", class="barGraphCanvas")
+
+    script(src="/scripts/chartScript.js")
+    script
