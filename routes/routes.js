@@ -22,8 +22,8 @@ var router = express.Router();
 router.route("/").get(
     function (req, res) {
         console.log("Session: ", req.session);
-        if(req.session.state === 'Logged-in') { 
-            console.log("State of User: "  +req.session.userId +  " "+ req.session.state);
+        if (req.session.state === 'Logged-in') {
+            console.log("State of User: " + req.session.userId + " " + req.session.state);
         }
         var model = {
             loggedin: (req.session.state === 'Logged-in') ? true : false,
@@ -36,9 +36,31 @@ router.route("/").get(
 
 router.route("/logout").get(
     function (req, res) {
-        res.render("index"); 
+        res.render("index");
         req.session.state = "Logged-Out";
         console.log(req.session);
+    }
+);
+
+router.route("/updateuser").post(
+    function(req,res) {
+        var model = {
+            loggedin: (req.session.state === 'Logged-in') ? true : false,
+            isAdmin: (req.session.user_level) === 'admin' ? true : false
+        }; 
+        console.log("Update user");
+        console.log(req.body.username);
+    }
+);
+
+router.route("/viewprofile").get(
+    function (req, res) {
+        console.log(req.session);
+        var model = {
+            loggedin: (req.session.state === 'Logged-in') ? true : false,
+            isAdmin: (req.session.user_level) === 'admin' ? true : false
+        };
+        res.render("profile", model);
     }
 );
 router.route('/login').get(
