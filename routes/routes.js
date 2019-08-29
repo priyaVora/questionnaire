@@ -50,6 +50,35 @@ router.route("/updateuser").post(
         }; 
         console.log("Update user");
         console.log(req.body.username);
+        const username = req.body.username;
+        try {
+            MongoClient.connect(url, mongoOptions, function (err, client) {
+                assert.equal(null, err);
+                const db = client.db(dbName);
+                var myquery = {
+                    username: username
+                };
+                var newvalues = {
+                    $set: {
+                        username: username,
+                        hash: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync()),
+                        email: req.body.email,
+                        age: req.body.age,
+                        answer1: req.body.flavor, 
+                        answer2: req.body.message,
+                        answer3: req.body.season
+                    }
+                };
+
+                db.collection("Users").updateOne(myquery, newvalues, function (err, res) {
+                    if (err) throw err;
+                    console.log("1 document updated");
+                });
+                res.redirect('http://localhost:3000/admin/viewusers');
+            });
+        } catch (err) {
+            console.log(err);
+        }
     }
 );
 
