@@ -1,0 +1,62 @@
+extends layout.pug
+block content
+    div="View Profile"
+      form(method='POST' action='/updateuser')
+                div
+                    label(for='username') Username:  
+                    input(type='text', placeholder='Username' name="username")
+                div
+                    label(for='password') Password: 
+                    input(type='Password', placeholder='Password' name='password')
+                div
+                    label(for='description') Email:
+                    input(type='Email', placeholder='Email' name='email')
+                div
+                    label(for='age') Age:  
+                    input(type='text', placeholder='Age' name='age')
+                div
+                    h1()="What is your favorite ice cream flavor?"
+                    input(type="radio" name="flavor" value="Vanilla")
+                    label() Vanilla
+                div
+                    input(type="radio" name="flavor" value="Chocolate")
+                    label() Chocolate
+                div
+                    input(type="radio" name="flavor" value="Strawberry")
+                    label() Strawberry
+                div
+                    input(type="radio" name="flavor" value="Mint Chocolate Chip")
+                    label() Mint Chocolate Chip
+
+                div
+                    h1()="What is your favorite messaging system?"
+                    input(type="radio" name="message" value="Phone Call")
+                    label() Phone Call
+                div
+                    input(type="radio" name="message" value="Text Messages")
+                    label() Text Messages
+                div
+                    input(type="radio" name="message" value="Morse Code")
+                    label() Morse Code
+                div
+                    input(type="radio" name="message" value="Mail")
+                    label() Mail
+
+                div
+                    h1()="What is your favorite season?"
+                    input(type="radio" name="season" value="Winter")
+                    label() Winter
+                div
+                    input(type="radio" name="season" value="Spring")
+                    label() Spring
+                div
+                    input(type="radio" name="season" value="Summer")
+                    label() Summer
+                div
+                    input(type="radio" name="season" value="Fall")
+                    label() Fall
+
+                div
+                button.btn.btn-primary(type='submit') Update
+    
+    

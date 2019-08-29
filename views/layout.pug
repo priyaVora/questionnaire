@@ -7,11 +7,12 @@ html
             ul(class="navList")
                 li(class="navItemLeft")
                     a(href="/", class="navLink")="Home"
-               
                 if isAdmin
                     li(class="navItemLeft")
                         a(href="/admin/viewusers", class="navLink")="View Users"
                 if loggedin
+                    li(class="navItemRight")
+                        a(href="/viewProfile", class="navLink")="View Profile"
                     li(class="navItemRight")
                         a(href="/logout", class="navLink")="Log Out"
                 else           
